@@ -45,7 +45,6 @@ public class RepositoryTests {
     }
 
     @Test
-    @DisplayName("Знайти по ID")
     void shouldFindById() {
         Device device = deviceRepository.save(new Device("Thermostat", "Climate", null));
         Optional<Device> found = deviceRepository.findById(device.getId());
@@ -54,7 +53,6 @@ public class RepositoryTests {
     }
 
     @Test
-    @DisplayName("Оновити ім'я пристрою")
     void shouldUpdateDevice() {
         Device device = deviceRepository.findAll().get(0);
         device.setName("Updated Lamp");
@@ -65,7 +63,6 @@ public class RepositoryTests {
     }
 
     @Test
-    @DisplayName("Видалити пристрій")
     void shouldDeleteDevice() {
         Device device = deviceRepository.findAll().get(0);
         deviceRepository.deleteById(device.getId());
@@ -75,7 +72,6 @@ public class RepositoryTests {
     }
 
     @Test
-    @DisplayName("Знайти всі пристрої певного типу")
     void shouldFindDevicesByType() {
         List<Device> devices = deviceRepository.findAll();
         List<Device> lightingDevices = devices.stream()
@@ -87,7 +83,6 @@ public class RepositoryTests {
     }
 
     @Test
-    @DisplayName("Зберегти новий пристрій")
     void shouldSaveNewDevice() {
         Device device = new Device("Fan", "Cooling", null);
         Device saved = deviceRepository.save(device);
@@ -97,7 +92,6 @@ public class RepositoryTests {
     }
 
     @Test
-    @DisplayName("Перевірити наявність пристрою по ID")
     void shouldExistById() {
         Device device = deviceRepository.findAll().get(0);
         boolean exists = deviceRepository.existsById(device.getId());
@@ -106,14 +100,12 @@ public class RepositoryTests {
     }
 
     @Test
-    @DisplayName("Кількість пристроїв у базі")
     void shouldCountDevices() {
         long count = deviceRepository.count();
         assertThat(count).isEqualTo(2);
     }
 
     @Test
-    @DisplayName("Видалити всі пристрої")
     void shouldDeleteAllDevices() {
         deviceRepository.deleteAll();
         List<Device> devices = deviceRepository.findAll();
@@ -122,7 +114,6 @@ public class RepositoryTests {
     }
 
     @Test
-    @DisplayName("Після збереження пристрій має згенерований ID")
     void shouldAssignIdAfterSave() {
         Device device = new Device("Speaker", "Audio", null);
         Device saved = deviceRepository.save(device);
