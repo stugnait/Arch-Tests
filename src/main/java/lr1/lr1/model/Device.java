@@ -16,8 +16,19 @@ public class Device {
     private String type;  // Тип пристрою (наприклад, освітлення, опалення)
 
     @ManyToOne
-    @JoinColumn(name = "room_id", nullable = false)
+    @JoinColumn(name = "room_id", nullable = true)
     private Room room;  // Пристрій належить певній кімнаті
+
+
+    public Device() {
+
+    }
+
+    public Device(String name, String type, Room room) {
+        this.name = name;
+        this.type = type;
+        this.room = room;
+    }
 
     public Long getId() {
         return id;

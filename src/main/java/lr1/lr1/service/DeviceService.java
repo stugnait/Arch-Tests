@@ -18,6 +18,10 @@ public class DeviceService {
         this.deviceRepository = deviceRepository;
     }
 
+    public List<Device> getAllDevices() {
+        return deviceRepository.findAll();
+    }
+
     public Device getDeviceById(Long id) {
         return deviceRepository.findById(id).orElseThrow();
     }
