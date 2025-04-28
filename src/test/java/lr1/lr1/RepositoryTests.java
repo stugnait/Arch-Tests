@@ -38,7 +38,6 @@ public class RepositoryTests {
     }
 
     @Test
-    @DisplayName("Знайти всі пристрої")
     void shouldFindAllDevices() {
         List<Device> devices = deviceRepository.findAll();
         assertThat(devices).hasSize(2);
