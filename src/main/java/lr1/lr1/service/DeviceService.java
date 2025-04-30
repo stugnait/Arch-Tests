@@ -11,22 +11,18 @@ import java.util.Optional;
 @Service
 public class DeviceService {
 
-    private final DeviceRepository deviceRepository;
+    private static DeviceRepository deviceRepository;
 
     @Autowired
     public DeviceService(DeviceRepository deviceRepository) {
-        this.deviceRepository = deviceRepository;
-    }
-
-    public List<Device> getAllDevices() {
-        return deviceRepository.findAll();
+        DeviceService.deviceRepository = deviceRepository;
     }
 
     public Device getDeviceById(Long id) {
         return deviceRepository.findById(id).orElseThrow();
     }
 
-    public Device createDevice(Device device) {
+    public static Device createDevice(Device device) {
         return deviceRepository.save(device);
     }
 

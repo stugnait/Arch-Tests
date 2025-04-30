@@ -26,11 +26,6 @@ public class DeviceController {
         return ResponseEntity.ok(deviceService.getDeviceById(id));
     }
 
-    @GetMapping("/")
-    public ResponseEntity<List<Device>> getAllDevices() {
-        return ResponseEntity.ok(deviceService.getAllDevices());
-    }
-
     @PostMapping
     public ResponseEntity<Device> createDevice(@RequestBody Device device) {
         return ResponseEntity.status(HttpStatus.CREATED).body(deviceService.createDevice(device));
