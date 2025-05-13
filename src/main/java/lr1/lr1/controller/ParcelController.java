@@ -1,44 +1,42 @@
 package lr1.lr1.controller;
 
+import lr1.lr1.dto.ParcelDTO;
 import lr1.lr1.model.Parcel;
 import lr1.lr1.service.ParcelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/parcels")
+@RequestMapping("/parcels")
 public class ParcelController {
 
-    private final ParcelService parcelService;
-
     @Autowired
-    public ParcelController(ParcelService parcelService) {
-        this.parcelService = parcelService;
+    private ParcelService parcelService;
+
+    @GetMapping
+    public List<Parcel> getAllParcels() {
+        return parcelService.getAllParcels();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Parcel> getParcel(@PathVariable Long id) {
-        return ResponseEntity.ok(parcelService.getParcelById(id));
+    public Parcel getParcelById(@PathVariable Long id) {
+        return parcelService.getParcelById(id);
     }
 
     @PostMapping
-    public ResponseEntity<Parcel> createParcel(@RequestBody Parcel parcel) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(parcelService.createParcel(parcel));
+    public Parcel createParcel(@RequestBody ParcelDTO dto) {
+        return parcelService.createParcel(dto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Parcel> updateParcel(@PathVariable Long id, @RequestBody Parcel parcel) {
-        return ResponseEntity.ok(parcelService.updateParcel(id, parcel));
+    public Parcel updateParcel(@PathVariable Long id, @RequestBody ParcelDTO dto) {
+        return parcelService.updateParcel(id, dto);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteParcel(@PathVariable Long id) {
+    public void deleteParcel(@PathVariable Long id) {
         parcelService.deleteParcel(id);
-        return ResponseEntity.noContent().build();
     }
 }
