@@ -82,8 +82,10 @@ class RoomServiceTest {
     @Test
     @DisplayName("repository.findAll: повертає всі збережені кімнати")
     void whenMultipleRooms_thenFindAllReturnsAll() {
-        Room r1 = new Room(); r1.setName("A");
-        Room r2 = new Room(); r2.setName("B");
+        Room r1 = new Room();
+        r1.setName("A");
+        Room r2 = new Room();
+        r2.setName("B");
         repository.save(r1);
         repository.save(r2);
 
@@ -96,7 +98,8 @@ class RoomServiceTest {
     @Test
     @DisplayName("updateRoom: змінює поля існуючої кімнати")
     void whenUpdateRoom_thenFieldsUpdated() {
-        Room orig = new Room(); orig.setName("OldName");
+        Room orig = new Room();
+        orig.setName("OldName");
         Room saved = repository.save(orig);
 
         Room toUpdate = new Room();
@@ -118,7 +121,8 @@ class RoomServiceTest {
     @Test
     @DisplayName("updateRoom: при null-ID створює нову кімнату")
     void whenUpdateNullId_thenCreatesNew() {
-        Room r = new Room(); r.setName("Guest");
+        Room r = new Room();
+        r.setName("Guest");
         Room result = service.updateRoom(null, r);
 
         assertNotNull(result.getId());
@@ -128,7 +132,8 @@ class RoomServiceTest {
     @Test
     @DisplayName("deleteRoom: видаляє існуючу кімнату")
     void whenDeleteExisting_thenRemoved() {
-        Room r = new Room(); r.setName("Office");
+        Room r = new Room();
+        r.setName("Office");
         Room saved = repository.save(r);
 
         service.deleteRoom(saved.getId());
@@ -153,7 +158,8 @@ class RoomServiceTest {
     @DisplayName("createRoom: кількість записів зростає на 1")
     void whenCreate_thenCountIncrements() {
         long before = repository.count();
-        Room r = new Room(); r.setName("Hall");
+        Room r = new Room();
+        r.setName("Hall");
         service.createRoom(r);
         assertEquals(before + 1, repository.count());
     }
@@ -161,7 +167,8 @@ class RoomServiceTest {
     @Test
     @DisplayName("updateRoom: кількість записів не змінюється")
     void whenUpdate_thenCountUnchanged() {
-        Room r = new Room(); r.setName("X");
+        Room r = new Room();
+        r.setName("X");
         Room saved = repository.save(r);
         long before = repository.count();
 
@@ -172,7 +179,8 @@ class RoomServiceTest {
     @Test
     @DisplayName("deleteRoom: кількість записів зменшується на 1")
     void whenDelete_thenCountDecrements() {
-        Room r = new Room(); r.setName("Y");
+        Room r = new Room();
+        r.setName("Y");
         Room saved = repository.save(r);
         long before = repository.count();
 
@@ -183,11 +191,13 @@ class RoomServiceTest {
     @Test
     @DisplayName("послідовні операції: створити → оновити → видалити")
     void whenSequenceCreateUpdateDelete_sequenceWorks() {
-        Room r = new Room(); r.setName("Seq");
+        Room r = new Room();
+        r.setName("Seq");
         Room created = service.createRoom(r);
         assertNotNull(created.getId());
 
-        Room upd = new Room(); upd.setName("SeqUp");
+        Room upd = new Room();
+        upd.setName("SeqUp");
         Room after = service.updateRoom(created.getId(), upd);
         assertEquals("SeqUp", after.getName());
 
@@ -198,7 +208,8 @@ class RoomServiceTest {
     @Test
     @DisplayName("getRoomById: після створення повертає об'єкт з правильним ім'ям")
     void whenFindAfterCreate_thenNameMatches() {
-        Room r = new Room(); r.setName("Match");
+        Room r = new Room();
+        r.setName("Match");
         Room saved = service.createRoom(r);
 
         Room found = service.getRoomById(saved.getId());
